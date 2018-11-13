@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { observable } from 'mobx';
-import { observer } from 'mobx';
+import { observer } from 'mobx-react';
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      count : 0,
-    }
+@observer class App extends Component {
+  handleDec = () =>{
+    this.props.store.handleDec();
   }
-  __handleDec = () => {
-    this.setState({
-      count : this.state.count - 1,
-    })
-  }
-  __handleInc = () => {
-    this.setState({
-      count : this.state.count + 1,
-    })
+  handleInc = () =>{
+    this.props.store.handleInc();
   }
   render() {
     return (
@@ -29,9 +18,9 @@ class App extends Component {
         </header>
         <h2>Counter</h2>
         <div>
-          <p>Count: {this.state.count} </p>
-          <button onClick={this.__handleDec}> - </button>
-          <button onClick={this.__handleInc}> + </button>
+          <p>Count: {this.props.store.count} </p>
+          <button onClick={this.handleDec}> - </button>
+          <button onClick={this.handleInc}> + </button>
         </div>
       </div>
     );
