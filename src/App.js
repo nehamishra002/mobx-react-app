@@ -17,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Todo} />
             <Route exact path="/counter" component={Counter} />
+            <Route exact path="/todo" component={Todo} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

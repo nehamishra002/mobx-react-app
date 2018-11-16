@@ -10,9 +10,11 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 import CounterStore from './stores/CounterStore';
+import TodoStore from './stores/TodoStore';
 
 const stores = {
-    CounterStore
+    CounterStore,
+    TodoStore
 };
 ReactDOM.render(
   <Provider {...stores}>
