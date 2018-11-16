@@ -11,13 +11,17 @@ import DevTools from 'mobx-react-devtools';
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Todo} />
-          <Route exact path="/counter" component={Counter} />
-          <Route component={NoMatch} />
-        </Switch>
-      </Router>
+      <section>
+        <DevTools/>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Todo} />
+            <Route exact path="/counter" component={Counter} />
+            <Route exact path="/todo" component={Todo} />
+            <Route component={NoMatch} />
+          </Switch>
+        </Router>
+      </section>
     );
   }
 }

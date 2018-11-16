@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import { inject, observer } from 'mobx-react';
-import DevTools from 'mobx-react-devtools';
 
 @inject('CounterStore')
 @observer class Counter extends Component {
@@ -15,7 +14,6 @@ import DevTools from 'mobx-react-devtools';
   render() {
     return (
       <div className="App">
-        <DevTools />
         <header>
           <img src={logo} className="App-logo" alt="logo" />
         </header>
