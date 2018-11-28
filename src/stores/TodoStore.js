@@ -5,19 +5,17 @@ export class TodoStore {
     @observable todos = [];
     @observable filter = "";
 
-    constructor() {
-      this.todos = [];
-    }
-
     @computed get filteredTodo(){
       var matchesFilter = new RegExp(this.filter, "i");
       return this.todos.filter(todo => !this.filter || matchesFilter.test(todo.value))
     }
-
     @computed get completedTodosCount() {
     	return this.todos.filter(
 			todo => todo.completed === true
 		  ).length;
+    }
+    @computed get allTodosCount() {
+    	return this.todos.length;
     }
     createTodo(value){
       this.todos.push(new Todo(value));

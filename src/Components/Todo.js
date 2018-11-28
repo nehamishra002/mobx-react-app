@@ -17,7 +17,8 @@ import { inject, observer } from 'mobx-react';
     return todo.completed = !todo.completed;
   }
   render() {
-    const {todos, filter, filteredTodo, clearCompleted, completedTodosCount} = this.props.TodoStore;
+
+    const {todos, filter, filteredTodo, clearCompleted, completedTodosCount, allTodosCount} = this.props.TodoStore;
 
     const renderTodo = filteredTodo.map(todo => (
       <li key={todo.id}>
@@ -28,20 +29,20 @@ import { inject, observer } from 'mobx-react';
 
     return (
       <div className="Todo">
-        <p>Todo</p>
-        <div>
-          <p>Create new todo </p>
-          <input className="create" onKeyPress={this.createNew.bind(this)} />
-        </div>
+        <h1>ReactJS Todo App using MobX</h1>
         <div>
           <p>Search todo {filter} </p>
           <input className="filter" value={filter} onChange={this.handleFilter.bind(this)} />
         </div>
-        <ol>
-          {renderTodo}
-        </ol>
-        <p>Completed todo : {completedTodosCount} </p>
-        <a href="#" onClick={clearCompleted}> Clear Completed tasks </a>
+        <div>
+          <p>Create new todo</p>
+          <input className="create" onKeyPress={this.createNew.bind(this)} />
+          <ol>
+            {renderTodo}
+          </ol>
+          <p>Completed todo : {completedTodosCount} / {allTodosCount} </p>
+          <a href="#" onClick={clearCompleted}> Clear Completed tasks </a>
+        </div>
       </div>
     );
   }
