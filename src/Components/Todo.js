@@ -23,9 +23,8 @@ import ClearIcon from '../cancel.svg';
     });
   };
 
-
-  createNew(e){
-    if(e.which === 13){
+  createNew = e => {
+    if(e.which === 13 && e.target.value.length > 0){
       this.props.TodoStore.createTodo(e.target.value);
       e.target.value = "";
     }
@@ -56,13 +55,12 @@ import ClearIcon from '../cancel.svg';
     ))
 
     return (
-
       <div className="Todo">
           <h1>ReactJS Todo App using MobX</h1>
           <div className="Todo-form">
             {
               this.state.typeInput === 'Add' ?
-              <TextField id="todo-box" variant="outlined" onKeyPress={this.createNew.bind(this)} placeholder={'Create a todo'} width={65}/> :
+              <TextField id="todo-box" variant="outlined" onKeyPress={this.createNew} placeholder={'Create a todo'} width={65}/> :
               <TextField id="todo-filter"  variant="outlined" value={filter} onChange={this.handleFilter.bind(this)}  placeholder={'Search for a todo'}/>
             }
             <FormControl variant="outlined" >
@@ -77,13 +75,16 @@ import ClearIcon from '../cancel.svg';
             {renderTodo}
           </ol>
           <div className="Todo-actions">
-            <Button variant="contained" onClick={clearCompleted} color="default">
-              <img src={ClearIcon} /> <span>Clear Completed tasks</span>
-            </Button>
+            <div className="Todo-clear" onClick={clearCompleted}>
+              <Button variant="contained" color="default">
+                <img src={ClearIcon} />
+              </Button>
+              <p>Clear Completed tasks</p>
+            </div>
             <p>Task status : {completedTodosCount} / {allTodosCount} </p>
           </div>
       </div>
-    );
+    )
   }
 }
 

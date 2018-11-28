@@ -32,3 +32,10 @@
   display: flex;
   justify-content: space-between;
 }
+.Todo-clear{
+  display: flex;
+  cursor: pointer;
+}
+.Todo-clear p {
+  padding: 5px
+}
