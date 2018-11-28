@@ -20,11 +20,10 @@ export class TodoStore {
     createTodo(value){
       this.todos.push(new Todo(value));
     }
-
     clearCompleted = () => {
       return this.todos = this.todos.filter(
 			     todo => !todo.completed
-		  );
+		  )
     }
 }
 var todoStore = window.store = new TodoStore;
