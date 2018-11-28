@@ -1,11 +1,32 @@
-import { observable, action, reaction, autorun } from 'mobx';
+import { observable, action, reaction, autorun, computed } from 'mobx';
+import Todo from './Todo';
 
 export class TodoStore {
     @observable todos = [];
     @observable filter = "";
 
-    constructor(){
-      this.todos = ['walk pogo', 'take pogo to the park', 'buy orange juice from Benison'];
+    constructor() {
+      this.todos = [];
+    }
+
+    @computed get filteredTodo(){
+      var matchesFilter = new RegExp(this.filter, "i");
+      return this.todos.filter(todo => !this.filter || matchesFilter.test(todo.value))
+    }
+
+    @computed get completedTodosCount() {
+    	return this.todos.filter(
+			todo => todo.completed === true
+		  ).length;
+    }
+    createTodo(value){
+      this.todos.push(new Todo(value));
+    }
+
+    clearCompleted = () => {
+      return this.todos = this.todos.filter(
+			     todo => !todo.completed
+		  );
     }
 }
 var todoStore = window.store = new TodoStore;
@@ -13,5 +34,5 @@ var todoStore = window.store = new TodoStore;
 export default new TodoStore();
 
 autorun(() => {
-  console.log(TodoStore.todos);
+  console.log(TodoStore);
 })
