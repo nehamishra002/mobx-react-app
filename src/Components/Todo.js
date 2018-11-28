@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import ClearIcon from '../cancel.svg';
 
 @inject('TodoStore')
 @observer class Todo extends Component {
+  state = {
+   typeInput: 'Add',
+ };
+ handleDropDownChange = event => {
+    this.setState({
+       typeInput: event.target.value,
+    });
+  };
+
 
   createNew(e){
     if(e.which === 13){
@@ -19,30 +39,49 @@ import { inject, observer } from 'mobx-react';
   render() {
 
     const {todos, filter, filteredTodo, clearCompleted, completedTodosCount, allTodosCount} = this.props.TodoStore;
+    const { anchorEl } = this.state;
 
     const renderTodo = filteredTodo.map(todo => (
-      <li key={todo.id}>
-      <input type="checkbox" onClick={() => this.toggleComplete(todo)} value={todo.completed} />
-      {todo.value}
-      </li>
+      <div>
+      <FormControlLabel control={
+            <Checkbox
+              checked={todo.completed}
+              onChange={() => this.toggleComplete(todo)}
+              value={todo.value}
+            />
+          }
+          label={todo.value}
+        />
+      </div>
     ))
 
     return (
+
       <div className="Todo">
-        <h1>ReactJS Todo App using MobX</h1>
-        <div>
-          <p>Search todo {filter} </p>
-          <input className="filter" value={filter} onChange={this.handleFilter.bind(this)} />
-        </div>
-        <div>
-          <p>Create new todo</p>
-          <input className="create" onKeyPress={this.createNew.bind(this)} />
+          <h1>ReactJS Todo App using MobX</h1>
+          <div className="Todo-form">
+            {
+              this.state.typeInput === 'Add' ?
+              <TextField id="todo-box" variant="outlined" onKeyPress={this.createNew.bind(this)} placeholder={'Create a todo'} width={65}/> :
+              <TextField id="todo-filter"  variant="outlined" value={filter} onChange={this.handleFilter.bind(this)}  placeholder={'Search for a todo'}/>
+            }
+            <FormControl variant="outlined" >
+              <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="outlined-type-input" width={80}>Type</InputLabel>
+              <Select value={this.state.typeInput} onChange={this.handleDropDownChange} input={<OutlinedInput labelWidth={40} name="typeInput" id="outlined-type-input"/>}>
+                <MenuItem value={'Add'}>Type : Add</MenuItem>
+                <MenuItem value={'Search'}>Type : Search</MenuItem>
+             </Select>
+            </FormControl>
+          </div>
           <ol>
             {renderTodo}
           </ol>
-          <p>Completed todo : {completedTodosCount} / {allTodosCount} </p>
-          <a href="#" onClick={clearCompleted}> Clear Completed tasks </a>
-        </div>
+          <div className="Todo-actions">
+            <Button variant="contained" onClick={clearCompleted} color="default">
+              <img src={ClearIcon} /> <span>Clear Completed tasks</span>
+            </Button>
+            <p>Task status : {completedTodosCount} / {allTodosCount} </p>
+          </div>
       </div>
     );
   }
