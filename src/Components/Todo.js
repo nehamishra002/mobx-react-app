@@ -14,15 +14,14 @@ import { inject, observer } from 'mobx-react';
     this.props.TodoStore.filter = e.target.value;
   }
   toggleComplete(todo){
-    console.log(todo);
-    todo.completed = !todo.completed;
+    return todo.completed = !todo.completed;
   }
   render() {
-    const {todos, filter, filteredTodo, clearCompleted} = this.props.TodoStore;
+    const {todos, filter, filteredTodo, clearCompleted, completedTodosCount} = this.props.TodoStore;
 
     const renderTodo = filteredTodo.map(todo => (
       <li key={todo.id}>
-      <input type="checkbox" onChange={this.toggleComplete(this, todo)} value={todo.completed} />
+      <input type="checkbox" onClick={() => this.toggleComplete(todo)} value={todo.completed} />
       {todo.value}
       </li>
     ))
@@ -41,6 +40,7 @@ import { inject, observer } from 'mobx-react';
         <ol>
           {renderTodo}
         </ol>
+        <p>Completed todo : {completedTodosCount} </p>
         <a href="#" onClick={clearCompleted}> Clear Completed tasks </a>
       </div>
     );
