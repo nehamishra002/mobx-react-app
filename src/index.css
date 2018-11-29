@@ -6,6 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background: rgb(19,84,122);
+  background: linear-gradient(90deg, rgba(19,84,122,1) 16%, rgba(128,208,199,1) 83%);
 }
 
 code {
