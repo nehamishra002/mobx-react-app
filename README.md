@@ -1,12 +1,9 @@
 [**MobX-React-App**](https://github.com/rashmiap/mobx-react-app)
-
-
-Made with :heart: in React
 -
 Playing around with [MobX](https://github.com/mobxjs/mobx)
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Demo
+Screenshots 
 -
 ![Preview Movie](src/preview-screen1.png)
 ![Preview Shows](src/preview-screen2.png)
