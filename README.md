@@ -8,8 +8,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Demo
 -
-![Preview Movie](src/Assets/preview-screen1.png)
-![Preview Shows](src/Assets/preview-screen2.png)
+![Preview Movie](src/preview-screen1.png)
+![Preview Shows](src/preview-screen2.png)
 
 **Run Locally**
 -
